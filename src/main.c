@@ -57,14 +57,14 @@ bool move_side(size_t x, size_t y) {
 void update_cells() {
   for (size_t y = 0; y < world.height; ++y) {
     for (size_t x = 0; x < world.width; ++x) {
-      cell_t *cell = &GET_CELL(world, x, y);
-      if (cell->properties & PROPERTY_MOVE_DOWN)
+      const cell_properties_t properties = GET_CELL(world, x, y).properties;
+      if (properties & PROPERTY_MOVE_DOWN)
         if (move_down(x, y))
           continue;
-      if (cell->properties & PROPERTY_MOVE_DOWN_SIDE)
+      if (properties & PROPERTY_MOVE_DOWN_SIDE)
         if (move_down_side(x, y))
           continue;
-      if (cell->properties & PROPERTY_MOVE_SIDE)
+      if (properties & PROPERTY_MOVE_SIDE)
         if (move_side(x, y))
           continue;
     }

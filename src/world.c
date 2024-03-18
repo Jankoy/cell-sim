@@ -16,7 +16,12 @@ void move_cell(world_t w, size_t x1, size_t y1, size_t x2, size_t y2) {
 static int sort_by_dest(const void *_x, const void *_y) {
   cell_move_t x = *((cell_move_t *)_x);
   cell_move_t y = *((cell_move_t *)_y);
-  return x.dest < y.dest;
+  if (x.dest > y.dest)
+    return 1;
+  else if (x.dest < y.dest)
+    return -1;
+  else
+    return 0;
 }
 
 void commit_cell_updates(world_t w) {
